@@ -8,11 +8,14 @@ public class WeatherAnalysis {
 
     public static final String DATA_SOURCE_FILE = "de/bcxp/challenge/weather.csv";
 
-    public static WeatherData getDayWithSmallestTempSpread() {
+    IWeatherDataReader dataReader = new WeatherDataCsvReader();
+
+
+    public WeatherData getDayWithSmallestTempSpread() {
 
         try {
             // Read weather data from csv File
-            List<WeatherData> weatherData = WeatherData.readWeatherDataFromCsv(DATA_SOURCE_FILE, ",");
+            List<WeatherData> weatherData = dataReader.readWeather(DATA_SOURCE_FILE, ",");
 
             // Get the min spread and return its day
             return weatherData.stream()

@@ -16,9 +16,10 @@ public final class App {
      */
     public static void main(String... args) {
         // Your preparation code …
+        WeatherAnalysis weatherAnalysis = new WeatherAnalysis();
 
         // Your day analysis function call …
-        WeatherData dayWithSmallestTempSpread = WeatherAnalysis.getDayWithSmallestTempSpread();
+        WeatherData dayWithSmallestTempSpread = weatherAnalysis.getDayWithSmallestTempSpread();
         System.out.printf("Day with smallest temperature spread: %s%n", dayWithSmallestTempSpread.day);
 
         //String countryWithHighestPopulationDensity = "Some country"; // Your population density analysis function call …
