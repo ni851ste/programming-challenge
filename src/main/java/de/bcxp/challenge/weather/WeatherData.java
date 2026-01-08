@@ -17,6 +17,6 @@ public class WeatherData {
     }
 
     public int getTempSpread() {
-        return tempSpread;
+        return this.tempSpread;
     }
 }

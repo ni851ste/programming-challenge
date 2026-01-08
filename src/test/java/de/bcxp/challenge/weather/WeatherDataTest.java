@@ -1,16 +1,10 @@
 package de.bcxp.challenge.weather;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
-import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WeatherDataTest {
-
-    @TempDir
-    Path tempDir;
 
     @Test
     void constructorShouldCalculateTempSpreadCorrectly() {

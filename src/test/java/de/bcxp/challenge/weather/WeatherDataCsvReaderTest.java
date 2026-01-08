@@ -15,10 +15,6 @@ class WeatherDataCsvReaderTest {
 
     @Test
     void readWeatherShouldParseRowsCorrectly() throws IOException {
-        List<String[]> mockData = List.of(
-                new String[]{"1", "20", "10"},
-                new String[]{"2", "1", "0"});
-
 
         List<WeatherData> result =
                 weatherDataReader.readWeather("de/bcxp/challenge/weather_10_entries.csv", ",");
