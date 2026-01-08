@@ -13,9 +13,11 @@ class WeatherAnalysisTest {
 
     @Test
     void getDayWithSmallestTempSpreadShouldReturnCorrectDay() {
-        List<WeatherData> mockData = List.of(new WeatherData(1, 20, 10),
+        List<WeatherData> mockData = List.of(
+                new WeatherData(1, 20, 10),
                 // min spread
-                new WeatherData(2, 1, 0), new WeatherData(3, 25, 10));
+                new WeatherData(2, 1, 0),
+                new WeatherData(3, 25, 10));
 
         try (MockedStatic<WeatherData> mocked = Mockito.mockStatic(WeatherData.class)) {
             mocked.when(() -> WeatherData.readWeatherDataFromCsv(WeatherAnalysis.DATA_SOURCE_FILE, ",")).thenReturn(mockData);
@@ -26,7 +28,6 @@ class WeatherAnalysisTest {
             assertEquals(1, result.tempSpread);
         }
     }
-
 
     @Test
     void getDayWithSmallestTempSpreadShouldThrowRuntimeExceptionOnIOException() {

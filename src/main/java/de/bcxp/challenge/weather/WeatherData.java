@@ -1,7 +1,5 @@
 package de.bcxp.challenge.weather;
 
-import de.bcxp.challenge.util.CsvUtil;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +32,6 @@ public class WeatherData {
     }
 
     public static List<WeatherData> readWeatherDataFromCsv(String filename, String delimiter) throws IOException {
-        // Init util class
 
         List<String[]> weatherFileContents = readCsv(filename, delimiter);
 

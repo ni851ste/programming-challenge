@@ -1,7 +1,10 @@
 package de.bcxp.challenge.weather;
 
+import de.bcxp.challenge.util.CsvUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,23 +36,29 @@ class WeatherDataTest {
     }
 
     @Test
-    void readWeatherDataFromCsv_shouldParseSingleRowCorrectly() throws IOException {
+    void readWeatherDataFromCsvShouldParseSingleRowCorrectly() throws IOException {
+        List<String[]> mockData = List.of(
+                new String[] {"1", "20", "10"},
+                new String[] {"2", "1", "0"});
 
+        try (MockedStatic<CsvUtil> mocked = Mockito.mockStatic(CsvUtil.class)) {
+            mocked.when(() -> CsvUtil.readCsv(WeatherAnalysis.DATA_SOURCE_FILE, ",")).thenReturn(mockData);
 
-        List<WeatherData> result =
-                WeatherData.readWeatherDataFromCsv("de/bcxp/challenge/weather_1_entries.csv",",");
+            List<WeatherData> result =
+                    WeatherData.readWeatherDataFromCsv(WeatherAnalysis.DATA_SOURCE_FILE,",");
 
-        assertEquals(1, result.size());
+            assertEquals(2, result.size());
 
-        WeatherData data = result.get(0);
-        assertEquals(1, data.day);
-        assertEquals(20, data.maxTemp);
-        assertEquals(10, data.minTemp);
-        assertEquals(10, data.tempSpread);
+            WeatherData data = result.get(0);
+            assertEquals(1, data.day);
+            assertEquals(20, data.maxTemp);
+            assertEquals(10, data.minTemp);
+            assertEquals(10, data.tempSpread);
+        }
     }
 
     @Test
-    void readWeatherDataFromCsv_shouldThrowIOExceptionForMissingFile() {
+    void readWeatherDataFromCsvShouldThrowIOExceptionForMissingFile() {
         assertThrows(IOException.class, () ->
                 WeatherData.readWeatherDataFromCsv(
                         "this/is/a/wrong/path", ",")
